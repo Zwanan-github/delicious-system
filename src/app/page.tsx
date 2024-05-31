@@ -1,113 +1,73 @@
-import Image from "next/image";
+import {Arrow, Cola, Recommend, Search} from "@/app/components/ui/SVG";
+import {RotatingChart} from "@/app/components/ui/RotatingChart";
+import {Toaster} from "react-hot-toast";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    return (
+        // 水平居中
+        <>
+            {/* 特色 */}
+            <Feature/>
+        </>
+    );
+}
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+// 特色
+const Feature  = () => {
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+    const title = "美食系统"
+    const desc = "品味全球美食，不出家门尽享饕餮盛宴！无论是异国风情还是本地特色，我们的美食系统为您精心挑选，只为每一口的完美体验。让每一次用餐，都成为幸福的享受。快来探索吧，舌尖上的美妙世界在等你！"
+    const features = [
+        {
+            title: "美食分类",
+            desc: "我们的美食系统不仅涵盖多种美食分类，还提供详细的菜品介绍和推荐，让您轻松找到心仪的美食，享受多样化的美食体验。快来探索我们的美食世界，开启一段美味之旅吧！",
+            icon: <Cola/>,
+        },
+        {
+            title: "美食搜索",
+            desc: "美食搜索，轻松发现让你心动的每一道佳肴！无论是中餐、西餐，还是异域风情，快速精准的搜索功能为你呈现最符合你口味的美食选择。快来使用我们的美食系统，享受个性化的推荐和全面的美食导航，开启一段专属于你的美味旅程吧",
+            icon: <Search/>,
+        },
+        {
+            title: "美食推荐",
+            desc: "美食推荐，让美食成为你的生活指南！我们精选了全球美食，为用户提供最符合你口味的推荐，让你轻松找到心仪的美食，享受美食的乐趣。快来使用我们的美食系统，开启一段美食之旅吧！",
+            icon: <Recommend/>,
+        }
+    ]
+    return (
+        <>
+            <div className="p-8">
+                <h1 className="text-4xl font-medium text-gray-700 text-center mt-6">
+                    {title}
+                </h1>
+                <p className="text-center mt-6 text-lg font-light text-gray-500">
+                    {desc}
+                </p>
+            </div>
+            {/* 轮播图 */}
+            <RotatingChart/>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+            <div className="grid grid-cols-1 md:grid-cols-3 md:mx-10">
+                {features.map((feature, index) => (
+                    <div className="p-8" key={index}>
+                        <div
+                            className="bg-indigo-100 rounded-full w-16 h-16 flex justify-center items-center text-indigo-500 shadow-2xl"
+                        >
+                            {feature.icon}
+                        </div>
+                        <h2 className="uppercase mt-6 text-indigo-500 font-medium mb-3">
+                            {feature.title}
+                        </h2>
+                        <p className="font-light text-sm text-gray-500 mb-3 h-28">
+                            {feature.desc}
+                        </p>
+                        <a className="text-indigo-500 flex items-center hover:text-indigo-600" href="/">
+                            去看看
+                            <Arrow/>
+                        </a>
+                    </div>
+                ))}
+            </div>
+        </>
+    )
 }

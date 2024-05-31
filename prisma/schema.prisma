@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// 美食
+model Food {
+  // id
+  id          Int      @id @default(autoincrement())
+  // 名称
+  name        String
+  // 描述
+  description String
+  // 类型 id
+  category    Int
+  // 热度
+  heat        Int
+  // 口味
+  taste       String
+  // 创建时间
+  createdAt   DateTime @default(now())
+}
+
+// 美食分类
+model Category {
+  // id
+  id   Int    @id @default(autoincrement())
+  // 名称
+  name String
+}
