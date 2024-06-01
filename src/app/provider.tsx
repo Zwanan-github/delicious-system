@@ -3,7 +3,7 @@
 
 import {NextUIProvider} from '@nextui-org/react'
 import {ThemeProvider as NextThemesProvider} from "next-themes";
-import MyNavbar from "@/app/components/ui/Navbar";
+import React from "react";
 
 
 export function Providers({children}: { children: React.ReactNode }) {

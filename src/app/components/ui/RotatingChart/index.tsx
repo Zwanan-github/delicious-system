@@ -23,7 +23,7 @@ export const RotatingChart = () => {
                 modules={[Autoplay, Pagination]}
                 spaceBetween={1}
                 slidesPerView={1}
-                // autoplay={{ delay: 3000, pauseOnMouseEnter: true }} // 设置自动播放的间隔时间, 鼠标移入时暂停播放
+                autoplay={{ delay: 3000, pauseOnMouseEnter: true }} // 设置自动播放的间隔时间, 鼠标移入时暂停播放
                 pagination={{ clickable: true }}
                 loop={true}
             >

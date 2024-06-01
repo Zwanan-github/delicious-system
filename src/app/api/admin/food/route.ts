@@ -3,10 +3,6 @@ import {Food} from "@prisma/client";
 import {prisma} from "../../../../../lib/prisma";
 import {jsonResponse} from "../../../../../lib/utils";
 
-export const config = {
-    runtime: 'edge',
-}
-
 export const POST = async (
     req: NextRequest
 ) => {

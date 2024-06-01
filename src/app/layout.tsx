@@ -5,6 +5,7 @@ import {Providers} from "@/app/provider";
 import {MyNavbar} from "@/app/components/ui/Navbar";
 import {MyFooter} from "@/app/components/ui/Footer";
 import {Toaster} from "react-hot-toast";
+import React from "react";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
-        <html lang="en" className='dark'>
+        <html lang="en" suppressHydrationWarning={true}>
         <body className={inter.className}>
         <Providers>
             <MyNavbar/>

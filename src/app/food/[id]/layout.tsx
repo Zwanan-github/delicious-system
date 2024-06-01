@@ -1,3 +1,5 @@
+import React from "react";
+
 export async function generateMetadata({ params } : {params: { id: string}}) {
     const { id } = params;
 

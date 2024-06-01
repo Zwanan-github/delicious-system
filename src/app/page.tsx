@@ -1,6 +1,5 @@
 import {Arrow, Cola, Recommend, Search} from "@/app/components/ui/SVG";
 import {RotatingChart} from "@/app/components/ui/RotatingChart";
-import {Toaster} from "react-hot-toast";
 
 export default function Home() {
     return (

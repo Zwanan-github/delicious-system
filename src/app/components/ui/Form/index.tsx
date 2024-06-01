@@ -141,6 +141,30 @@ const FoodForm = () => {
             toast.error("删除失败")
         }
     }
+
+    const showData = async (data: {
+        id: number,
+        name: string,
+        description: string,
+        category: number,
+        heat: number,
+        taste: string,
+        createdAt: string
+    }[]) => {
+        setLoading(false)
+        setTableData(data.map((food) => {
+            return {
+                id: food.id,
+                name: food.name,
+                description: food.description,
+                heat: food.heat,
+                taste: food.taste,
+                category: categoryOptions.current.get(food.category)!,
+                createdAt: formattedDate(food.createdAt),
+            }
+        }))
+    }
+
     const searchFood = async () => {
         setLoading(true)
         setTableData([])
@@ -159,28 +183,7 @@ const FoodForm = () => {
         })
         if (res.status === 200) {
             const data = await res.json()
-            setLoading(false)
-            setTableData(
-                data.map((food: {
-                    id: number,
-                    name: string,
-                    description: string,
-                    category: number,
-                    heat: number,
-                    taste: string,
-                    createdAt: string
-                }) => {
-                    return {
-                        id: food.id,
-                        name: food.name,
-                        description: food.description,
-                        heat: food.heat,
-                        taste: food.taste,
-                        category: categoryOptions.current.get(food.category),
-                        createdAt: formattedDate(food.createdAt),
-                    }
-                })
-            )
+            await showData(data)
             toast.success("搜索成功")
         } else {
             toast.error("搜索失败")
@@ -192,26 +195,12 @@ const FoodForm = () => {
         setTableData([])
         const res = await fetch("/api/food")
         const data = await res.json()
-        setLoading(false)
-        setTableData(data.map((food: {
-            id: number,
-            name: string,
-            description: string,
-            category: number,
-            heat: number,
-            taste: string,
-            createdAt: string
-        }) => {
-            return {
-                id: food.id,
-                name: food.name,
-                description: food.description,
-                heat: food.heat,
-                taste: food.taste,
-                category: categoryOptions.current.get(food.category),
-                createdAt: formattedDate(food.createdAt),
-            }
-        }))
+        if (res.status === 200) {
+            await showData(data)
+            toast.success("获取成功")
+        } else {
+            toast.error("获取失败")
+        }
     }
 
     const getCategories = async () => {
@@ -393,6 +382,9 @@ const CategoryForm = () => {
             const data = await res.json()
             setLoading(false)
             setTableData(data)
+            toast.success("获取成功")
+        } else {
+            toast.error("获取失败")
         }
     }
 
