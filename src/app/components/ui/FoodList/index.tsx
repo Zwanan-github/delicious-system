@@ -94,7 +94,6 @@ export const FoodList = ({id}: { id: string }) => {
                             ></div>
                             <div className="w-full md:w-2/3 p-4">
                                 <h2 className="text-2xl font-bold mb-2">{food.name}</h2>
-                                <p className="mb-4 w-full">{food.description}</p>
                                 <div className="flex mb-4">
                                     <Code size={"md"} className="mr-4">
                                         <span className="font-semibold">热度: </span>
