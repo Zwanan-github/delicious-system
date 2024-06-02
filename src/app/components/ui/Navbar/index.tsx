@@ -15,18 +15,18 @@ export const MyNavbar = () => {
 
     return (
         <Navbar disableAnimation isBordered>
-            <NavbarContent className="sm:hidden" justify="start">
+            <NavbarContent className="md:hidden" justify="start">
                 <NavbarMenuToggle />
             </NavbarContent>
 
-            <NavbarContent className="sm:hidden pr-3" justify="center">
+            <NavbarContent className="md:hidden" justify="center">
                 <NavbarBrand>
                     <Logo />
                     <p className="text-3xl font-bold text-inherit">美食系统</p>
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4" justify="start">
+            <NavbarContent className="hidden md:flex gap-4" justify="start">
                 <NavbarBrand>
                     <Button variant="light">
                         <Logo />
@@ -35,7 +35,7 @@ export const MyNavbar = () => {
                 </NavbarBrand>
             </NavbarContent>
 
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
+            <NavbarContent className="hidden md:flex" justify="center">
                 {menuItems.map((item, index) => (
                     <NavbarMenuItem key={`${item}-${index}`}>
                         <Link

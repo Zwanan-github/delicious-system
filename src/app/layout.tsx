@@ -6,6 +6,7 @@ import {MyNavbar} from "@/app/components/ui/Navbar";
 import {MyFooter} from "@/app/components/ui/Footer";
 import {Toaster} from "react-hot-toast";
 import React from "react";
+import {ToTopBtn} from "@/app/components/ui/ToTopBtn";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -20,8 +21,6 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <body className={inter.className}>
         <Providers>
             <MyNavbar/>
-            {/* 全局Toaster */}
-            <Toaster />
             {children}
             <MyFooter/>
         </Providers>
