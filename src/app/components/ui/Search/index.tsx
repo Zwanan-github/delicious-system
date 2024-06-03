@@ -14,6 +14,7 @@ export const Search = () => {
     const [foods, setFoods] = useState<{
         id: number,
         name: string,
+        image: string,
         description: string,
         category: string,
         heat: number,
@@ -55,6 +56,7 @@ export const Search = () => {
         const data = await res.json()
         setFoods(data.map((food: {
             id: number,
+            image: string,
             name: string,
             description: string,
             category: number,
@@ -64,6 +66,7 @@ export const Search = () => {
         }) => {
             return {
                 id: food.id,
+                image: food.image,
                 name: food.name,
                 description: food.description,
                 heat: food.heat,

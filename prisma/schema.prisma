@@ -19,14 +19,16 @@ model Food {
   id          Int      @id @default(autoincrement())
   // 名称
   name        String
-  // 描述
-  description String
+  // 描述, text
+  description String   @db.Text
   // 类型 id
   category    Int
   // 热度
   heat        Int
   // 口味
   taste       String
+  // 图片
+  image       String   @default("/images/rotating/main.png")
   // 创建时间
   createdAt   DateTime @default(now())
 }

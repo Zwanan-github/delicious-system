@@ -4,6 +4,7 @@ import {Arrow} from "@/app/components/ui/SVG";
 export const FoodList = ({foods}: {
     foods: {
         id: number,
+        image: string,
         name: string,
         description: string,
         category: string,
@@ -30,6 +31,7 @@ export const FoodList = ({foods}: {
 export const FoodListContent = ({foods} : {
     foods: {
         id: number,
+        image: string,
         name: string,
         description: string,
         category: string,
@@ -50,7 +52,7 @@ export const FoodListContent = ({foods} : {
                              className="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden flex my-4">
                             <div
                                 className="md:w-1/3 bg-cover"
-                                style={{backgroundImage: `url('/images/rotating/second.png')`}}
+                                style={{backgroundImage: `url('${food.image}')`}}
                             ></div>
                             <div className="w-full md:w-2/3 p-4">
                                 <h2 className="text-2xl font-bold mb-2">{food.name}</h2>

@@ -4,12 +4,9 @@ import {FoodList, FoodListContent} from "@/app/components/ui/FoodList";
 const Page = async () => {
 
     const getAllCategory = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/`,
+            {cache: 'no-store'}
+        );
         if (res.status !== 200) {
             console.error('获取失败');
             return [];
@@ -18,12 +15,9 @@ const Page = async () => {
     }
 
     const getFoods = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food`,
+            {cache: 'no-store'}
+        )
         if (res.status !== 200) {
             console.error("获取食物列表失败")
             return []
@@ -35,9 +29,13 @@ const Page = async () => {
         return data.map((food) => {
             return {
                 id: food.id,
+                image: food.image,
                 name: food.name,
                 description: food.description,
-                category: categoryData.find((category: {id: number, name: string}) => category.id === food.category)?.name || "未知",
+                category: categoryData.find((category: {
+                    id: number,
+                    name: string
+                }) => category.id === food.category)?.name || "未知",
                 heat: food.heat,
                 taste: food.taste,
                 createdAt: formattedDate(food.createdAt)

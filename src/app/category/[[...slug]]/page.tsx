@@ -9,12 +9,9 @@ const Page = async (
     const id = (Array.isArray(params.slug)  && params.slug.length === 1)? params.slug[0] : "-1";
 
     const getAllCategory = async () => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/`,
+            { cache: 'no-store' }
+        );
         if (res.status !== 200) {
             console.error('获取失败');
             return [];
@@ -23,14 +20,16 @@ const Page = async (
     }
 
     const getFoods = async () => {
+        console.info("getFoods", id)
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food/search`, {
             method: "POST",
+            body: JSON.stringify({
+                category: id === "-1" ? null : parseInt(id)
+            }),
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                category: id === "-1" ? null : parseInt(id)
-            })
+            cache: 'no-store'
         })
         if (res.status !== 200) {
             console.error("获取食物列表失败")
@@ -43,6 +42,7 @@ const Page = async (
         return data.map((food) => {
             return {
                 id: food.id,
+                image: food.image,
                 name: food.name,
                 description: food.description,
                 category: categoryData.find((category: {id: number, name: string}) => category.id === food.category)?.name || "未知",

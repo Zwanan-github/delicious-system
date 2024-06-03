@@ -4,6 +4,7 @@ import {Code, Divider, Spinner} from "@nextui-org/react";
 export const FoodCard = ({ food }: {
     food: {
         id: number,
+        image: string,
         name: string,
         description: string,
         category: string,
@@ -17,7 +18,7 @@ export const FoodCard = ({ food }: {
             {food ? (
                 <div className="max-w-screen-xl mx-auto pt-4 px-4">
                     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-                        <div className="bg-cover bg-center h-64" style={{ backgroundImage: `url('/images/rotating/second.png')` }}></div>
+                        <div className="bg-cover bg-center h-64" style={{ backgroundImage: `url(${food.image})` }}></div>
                         <div className="p-6">
                             <h2 className="text-3xl mb-4">{food.name}</h2>
                             <div className="text-gray-700 space-y-2">

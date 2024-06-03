@@ -22,6 +22,7 @@ export const FoodForm = () => {
 
     // 绑定
     const [
+        image,
         id,
         name,
         description,
@@ -31,6 +32,7 @@ export const FoodForm = () => {
         [categoryValue, setCategoryValue],
         categoryOptions,
     ] = [
+        useRef<HTMLInputElement>(null),
         useRef<HTMLInputElement>(null),
         useRef<HTMLInputElement>(null),
         useRef<HTMLTextAreaElement>(null),
@@ -63,27 +65,25 @@ export const FoodForm = () => {
     }[]>([])
 
     const addFood = async () => {
-        if (!name.current?.value || !description.current?.value || !categoryValue || !taste.current?.value) {
+        if (!name.current?.value || !description.current?.value || !categoryValue || !taste.current?.value || !image.current?.files?.length) {
             toast.error("请填写完整")
             return
         }
-        const food = {
-            name: name.current?.value,
-            description: description.current?.value,
-            category: parseInt(categoryValue),
-            heat: 0,
-            taste: taste.current?.value,
-            createdAt: ZonedDateTimeFormat(createdAt.toString()),
-        }
+
+        const foodData = new FormData();
+        foodData.append("name", name.current.value);
+        foodData.append("description", description.current.value);
+        foodData.append("category", categoryValue);
+        foodData.append("taste", taste.current.value);
+        foodData.append("createdAt", ZonedDateTimeFormat(createdAt.toString()));
+        foodData.append("image", image.current.files[0]);
+
         const res = await fetch("/api/admin/food", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(food)
+            body: foodData
         })
         if (res.status === 200) {
-            await getFood()
+            await getFood();
             toast.success("添加成功")
         } else {
             toast.error("添加失败")
@@ -94,23 +94,24 @@ export const FoodForm = () => {
             toast.error("请填写完整")
             return
         }
-        const food = {
-            id: parseInt(id.current?.value),
-            name: name.current?.value,
-            description: description.current?.value,
-            category: parseInt(categoryValue),
-            taste: taste.current?.value,
-            createdAt: ZonedDateTimeFormat(createdAt.toString()),
+
+        const foodData = new FormData();
+        foodData.append("id", id.current.value);
+        foodData.append("name", name.current.value);
+        foodData.append("description", description.current.value);
+        foodData.append("category", categoryValue);
+        foodData.append("taste", taste.current.value);
+        foodData.append("createdAt", ZonedDateTimeFormat(createdAt.toString()));
+        if (image.current?.files?.length) {
+            foodData.append("image", image.current.files[0]);
         }
+
         const res = await fetch("/api/admin/food", {
             method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(food)
+            body: foodData
         })
         if (res.status === 200) {
-            await getFood()
+            await getFood();
             toast.success("更新成功")
         } else {
             toast.error("更新失败")
@@ -139,6 +140,7 @@ export const FoodForm = () => {
         id: number,
         name: string,
         description: string,
+        image: string,
         category: number,
         heat: number,
         taste: string,
@@ -228,6 +230,8 @@ export const FoodForm = () => {
                 </TableBody>
             </Table>
             {/* 生成输入框 */}
+            {/* 上传图片 */}
+            <Input className={"mt-2"} ref={image} size={'sm'} type={"file"} label={"image"} placeholder=""/>
             <Input className={"mt-2"} ref={id} size={'sm'} type={"number"} label={"id"}/>
             <Input className={"mt-2"} ref={name} size={'sm'} type={"text"} label={"name"}/>
             <Textarea className={"mt-2"} ref={description} size={'sm'} type={"text"} label={"description"}/>
