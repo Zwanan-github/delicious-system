@@ -4,6 +4,25 @@ import {verifyAuth} from "../lib/auth";
 
 
 export async function middleware(req: NextRequest) {
+    // 访问 /food/id的时候，修改food为id的heat
+    if (req.nextUrl.pathname.startsWith('/food/')) {
+        const id = req.nextUrl.pathname.split('/')[2]
+        if (id) {
+            await fetch(`http://localhost:3000/api/food`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: parseInt(id),
+                })
+            })
+        }
+        console.info(`foodId为${id}的食物被访问`)
+    }
+
+
+
     // validate the user is authenticated
     const verifiedToken = await verifyAuth(req).catch((err) => {
         console.error(err.message)
@@ -27,6 +46,7 @@ export const config = {
     matcher: [
         '/api/admin/:path*',
         '/admin/:path*',
-        '/api/auth(/(?!login|logout).*)'
+        '/api/auth(/(?!login|logout).*)',
+        '/food/:path*'
     ],
 };

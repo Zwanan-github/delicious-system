@@ -4,7 +4,7 @@ import {Password, Username} from "@/app/components/ui/SVG";
 import {useRef} from "react";
 import toast from "react-hot-toast";
 
-export default function Home() {
+const Page = async () => {
 
     const username = useRef<HTMLInputElement>(null);
     const password = useRef<HTMLInputElement>(null);
@@ -68,3 +68,5 @@ export default function Home() {
         </>
     )
 }
+
+export default Page

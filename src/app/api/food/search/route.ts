@@ -14,6 +14,9 @@ export const POST = async (
             where: {
                 id: body.id,
             },
+            orderBy: {
+                heat: 'desc',
+            }
         })
         return jsonResponse(200, res)
     } else if (body.name) {
@@ -23,6 +26,9 @@ export const POST = async (
                     contains: body.name,
                 },
             },
+            orderBy: {
+                heat: 'desc',
+            }
         })
         return jsonResponse(200, res)
     } else if (body.category) {
@@ -30,10 +36,17 @@ export const POST = async (
             where: {
                 category: body.category,
             },
+            orderBy: {
+                heat: 'desc',
+            }
         })
         return jsonResponse(200, res)
     } else {
-        const res = await prisma.food.findMany()
+        const res = await prisma.food.findMany({
+            orderBy: {
+                heat: 'desc',
+            }
+        })
         return jsonResponse(200, res)
     }
 }

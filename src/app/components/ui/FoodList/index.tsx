@@ -1,17 +1,8 @@
-"use client"
-
-import {useEffect, useRef, useState} from "react";
-import toast from "react-hot-toast";
-import {formattedDate, ZonedDateTimeFormat} from "../../../../../lib/utils";
 import {Code, Link, Spinner} from "@nextui-org/react";
 import {Arrow} from "@/app/components/ui/SVG";
 
-export const FoodList = ({id}: { id: string }) => {
-
-    const [loading, setLoading] = useState(true)
-    const categoryOptions = useRef<Map<number, string>>(new Map())
-
-    const [foods, setFoods] = useState<{
+export const FoodList = ({foods}: {
+    foods: {
         id: number,
         name: string,
         description: string,
@@ -19,75 +10,44 @@ export const FoodList = ({id}: { id: string }) => {
         heat: number,
         taste: string,
         createdAt: string
-    }[]>([])
+    }[] | null
+}) => {
+    return (
+        <>
+            {!foods ?
+                <div className="flex justify-center items-center h-screen">
+                    <Spinner label="Loading..."/>
+                </div>
+                :
+                <div className={"w-full mx-auto p-2 md:p-8 h-full"}>
+                    <FoodListContent foods={foods}/>
+                </div>
+            }
+        </>
+    )
+}
 
-    const showData = async (data: {
+export const FoodListContent = ({foods} : {
+    foods: {
         id: number,
         name: string,
         description: string,
-        category: number,
+        category: string,
         heat: number,
         taste: string,
         createdAt: string
-    }[]) => {
-        setLoading(false)
-        setFoods(data.map((food) => {
-            return {
-                id: food.id,
-                name: food.name,
-                description: food.description,
-                heat: food.heat,
-                taste: food.taste,
-                // 从当前页面的 title 中获取 category 的 那么， title 为 美食分类 - name
-                category: categoryOptions.current.get(food.category)!,
-                createdAt: formattedDate(food.createdAt),
-            }
-        }))
-    }
-
-    const getCategories = async () => {
-        const res = await fetch("/api/category")
-        if (res.status === 200) {
-            const data = await res.json()
-            categoryOptions.current = new Map(data.map((category: { id: number, name: string }) => [category.id, category.name]))
-            return;
-        }
-        toast.error("获取分类失败")
-    }
-
-    const getFoods = async () => {
-        setLoading(true)
-        const res = await fetch(`/api/food/search`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            } ,
-            body: JSON.stringify({
-                category: id === "-1" ? null : parseInt(id)
-            })
-        })
-        if (res.status !== 200) {
-            toast.error("获取食物列表失败")
-            return
-        }
-        const data = await res.json()
-        await showData(data)
-    }
-
-
-    useEffect(() => {
-        getCategories().then(() => getFoods())
-    }, []);
-
+    }[] | null
+}) => {
     return (
-        <div className={"w-full p-2 md:p-8 h-full flex flex-col"}>
-            {
-                loading && <Spinner label="Loading..."/>
-            }
-            <div>
-                {foods
+        <>
+            {foods &&
+                <>
+                    {/* 共多少条结果 */}
+                    <div className="text-xl pl-5">共 {foods.length} 条结果</div>
+                    {foods
                     .map(food => (
-                        <div key={food.id} className="max-w-4xl w-full bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden flex mb-4">
+                        <div key={food.id}
+                             className="max-w-4xl w-full bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden flex my-4">
                             <div
                                 className="md:w-1/3 bg-cover"
                                 style={{backgroundImage: `url('/images/rotating/second.png')`}}
@@ -111,7 +71,8 @@ export const FoodList = ({id}: { id: string }) => {
                                     </Code>
                                 </div>
                                 <div className="w-full ">
-                                    <span className="float-left font-semibold">发布于: {ZonedDateTimeFormat(food.createdAt)}</span>
+                                            <span
+                                                className="float-left font-semibold">发布于: {food.createdAt}</span>
                                     <Link href={`/food/${food.id}`} isBlock className="py-0 float-right">
                                         去看看
                                         <Arrow/>
@@ -119,9 +80,9 @@ export const FoodList = ({id}: { id: string }) => {
                                 </div>
                             </div>
                         </div>
-                    ))
-                }
-            </div>
-        </div>
+                    ))}
+                </>
+            }
+        </>
     )
 }

@@ -1,16 +1,16 @@
-"use client"
+import { CategoryForm } from "@/app/components/ui/Form";
 
-import { MyForm } from "@/app/components/ui/Form";
-
-export default function Home() {
+const Page = async  () => {
     return (
         <>
             <div className="mb-4">
                 <p className="w-full text-3xl text-center">美食管理</p>
             </div>
             <div className="w-full max-w-5xl">
-                <MyForm type="category"/>
+                <CategoryForm/>
             </div>
         </>
     );
 }
+
+export default Page;

@@ -8,13 +8,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import {Image} from "@nextui-org/image";
 
-export const RotatingChart = () => {
-    const images = [
-        "/images/rotating/main.png",
-        "/images/rotating/second.png",
-        "/images/rotating/third.png"
-    ];
-
+export const RotatingChart = (
+    {images}: { images: string[]}
+) => {
     return (
         <div className={"w-[90%] md:w-[50%] h-full mx-auto overflow-hidden"}>
             <Swiper

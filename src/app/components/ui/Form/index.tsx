@@ -17,15 +17,8 @@ import {getLocalTimeZone, now} from "@internationalized/date";
 import {formattedDate, ZonedDateTimeFormat} from "../../../../../lib/utils";
 import toast from "react-hot-toast";
 
-export const MyForm = (
-    {type = "food|category"}: { type: string }
-) => {
-    return (
-        type === "food" ? <FoodForm/> : <CategoryForm/>
-    )
-}
 
-const FoodForm = () => {
+export const FoodForm = () => {
 
     // 绑定
     const [
@@ -266,7 +259,7 @@ const FoodForm = () => {
     );
 }
 
-const CategoryForm = () => {
+export const CategoryForm = () => {
 
     // 绑定
     const [
