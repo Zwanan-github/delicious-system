@@ -3,7 +3,7 @@ import React from "react";
 export async function generateMetadata({ params } : {params: { id: string}}) {
     const { id } = params;
 
-    const res = await fetch(`http://localhost:3000/api/food/search`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food/search`, {
         method: "POST",
         body: JSON.stringify({
             id: parseInt(id),

@@ -6,7 +6,7 @@ const Page = async ({ params } : {params: { id: string}}) => {
     const { id } = params
 
     const getFood = async () => {
-        const res = await fetch(`http://localhost:3000/api/food/search`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food/search`, {
             method: "POST",
             body: JSON.stringify({
                 id: parseInt(id),
@@ -31,7 +31,7 @@ const Page = async ({ params } : {params: { id: string}}) => {
             return null;
         }
         // 获取category
-        const categoryRes = await fetch(`http://localhost:3000/api/category/search`, {
+        const categoryRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/search`, {
             method: "POST",
             body: JSON.stringify({
                 id: data[0].category,

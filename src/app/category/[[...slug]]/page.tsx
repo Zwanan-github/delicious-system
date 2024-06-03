@@ -1,5 +1,4 @@
 import {FoodList} from "@/app/components/ui/FoodList";
-import toast from "react-hot-toast";
 import {formattedDate} from "../../../../lib/utils";
 import {MenuMobile, MenuPc} from "@/app/components/ui/CategoryList";
 
@@ -10,7 +9,7 @@ const Page = async (
     const id = (Array.isArray(params.slug)  && params.slug.length === 1)? params.slug[0] : "-1";
 
     const getAllCategory = async () => {
-        const res = await fetch(`http://localhost:3000/api/category/`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -24,7 +23,7 @@ const Page = async (
     }
 
     const getFoods = async () => {
-        const res = await fetch(`http://localhost:3000/api/food/search`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food/search`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

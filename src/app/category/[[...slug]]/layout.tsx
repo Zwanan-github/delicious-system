@@ -5,7 +5,7 @@ export async function generateMetadata({ params }: { params: { slug: string[]} }
     const { slug } = params;
 
     if (Array.isArray(slug) && slug.length === 1) {
-        const res = await fetch(`http://localhost:3000/api/category/search`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/search`, {
             method: "POST",
             body: JSON.stringify({
                 id: parseInt(slug[0]),

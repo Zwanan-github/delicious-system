@@ -4,7 +4,7 @@ import {FoodList, FoodListContent} from "@/app/components/ui/FoodList";
 const Page = async () => {
 
     const getAllCategory = async () => {
-        const res = await fetch(`http://localhost:3000/api/category/`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/category/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ const Page = async () => {
     }
 
     const getFoods = async () => {
-        const res = await fetch(`http://localhost:3000/api/food`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

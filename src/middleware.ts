@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     if (req.nextUrl.pathname.startsWith('/food/')) {
         const id = req.nextUrl.pathname.split('/')[2]
         if (id) {
-            await fetch(`http://localhost:3000/api/food`, {
+            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
