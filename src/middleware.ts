@@ -19,6 +19,7 @@ export async function middleware(req: NextRequest) {
             })
         }
         console.info(`foodId为${id}的食物被访问`)
+        return NextResponse.next()
     }
 
 
