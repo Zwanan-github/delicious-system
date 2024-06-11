@@ -1,28 +1,21 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import {verifyAuth} from "../lib/auth";
+import {notFound} from "next/navigation";
+import toast from "react-hot-toast";
+import {accessFoods} from "../lib/utils";
 
 
 export async function middleware(req: NextRequest) {
     // 访问 /food/id的时候，修改food为id的heat
     if (req.nextUrl.pathname.startsWith('/food/')) {
         const id = req.nextUrl.pathname.split('/')[2]
+        // 需要判断数字字符串
         if (id) {
-            await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: parseInt(id),
-                })
-            })
+            await accessFoods(parseInt(id))
         }
-        console.info(`foodId为${id}的食物被访问`)
         return NextResponse.next()
     }
-
-
 
     // validate the user is authenticated
     const verifiedToken = await verifyAuth(req).catch((err) => {
@@ -49,5 +42,5 @@ export const config = {
         '/admin/:path*',
         '/api/auth(/(?!login|logout).*)',
         '/food/:path*'
-    ],
+    ]
 };

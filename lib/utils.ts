@@ -32,3 +32,16 @@ export function ZonedDateTimeFormat(date: string) {
 export const formattedDate = (date: string) => {
     return date.replace('T', ' ').split('.')[0];
 }
+
+export const accessFoods = async (id: number) => {
+    console.info('accessFoods', id)
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            id: id,
+        })
+    })
+}

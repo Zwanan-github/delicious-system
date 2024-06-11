@@ -1,7 +1,12 @@
 import React from "react";
+import {notFound} from "next/navigation";
 
 export async function generateMetadata({ params } : {params: { id: string}}) {
     const { id } = params;
+
+    if (!parseInt(id)) {
+        notFound()
+    }
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food/search`, {
         method: "POST",
@@ -12,17 +17,11 @@ export async function generateMetadata({ params } : {params: { id: string}}) {
 
     if (res.status !== 200) {
         console.error("Failed to fetch data")
-        return {
-            title: "Not Found",
-            description: "Not Found",
-        };
+        notFound()
     }
     const data: [] | unknown = await res.json();
     if (!data || !Array.isArray(data) || data.length === 0) {
-        return {
-            title: "Not Found",
-            description: "Not Found",
-        };
+        notFound()
     }
     const metadata = {
         title: `${data[0].name}`,

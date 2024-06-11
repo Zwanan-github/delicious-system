@@ -20,7 +20,6 @@ const Page = async (
     }
 
     const getFoods = async () => {
-        console.info("getFoods", id)
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/food/search`, {
             method: "POST",
             body: JSON.stringify({

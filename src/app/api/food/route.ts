@@ -13,7 +13,7 @@ export const GET = async () => {
 }
 
 // 根据 id 增加热度
-export const PUT = async (
+export const POST = async (
     req: NextRequest,
 ) => {
     const body : Food = await req.json()
