@@ -90,17 +90,18 @@ export const FoodForm = () => {
         }
     }
     const updateFood = async () => {
-        if (!id.current?.value || !name.current?.value || !description.current?.value || !categoryValue || !taste.current?.value) {
-            toast.error("请填写完整")
+        if (!id.current?.value) {
+            toast.error("请填写完整id")
             return
         }
 
         const foodData = new FormData();
         foodData.append("id", id.current.value);
-        foodData.append("name", name.current.value);
-        foodData.append("description", description.current.value);
+        // 除了id，其他字段是可选的
+        foodData.append("name", name.current?.value || "");
+        foodData.append("description", description.current?.value || "");
         foodData.append("category", categoryValue);
-        foodData.append("taste", taste.current.value);
+        foodData.append("taste", taste.current?.value || "");
         foodData.append("createdAt", ZonedDateTimeFormat(createdAt.toString()));
         if (image.current?.files?.length) {
             foodData.append("image", image.current.files[0]);
@@ -234,7 +235,7 @@ export const FoodForm = () => {
             <Input className={"mt-2"} ref={image} size={'sm'} type={"file"} label={"image"} placeholder=""/>
             <Input className={"mt-2"} ref={id} size={'sm'} type={"number"} label={"id"}/>
             <Input className={"mt-2"} ref={name} size={'sm'} type={"text"} label={"name"}/>
-            <Textarea className={"mt-2"} ref={description} size={'sm'} type={"text"} label={"description"}/>
+            <Textarea className={"mt-2"} defaultValue={""} ref={description} size={'sm'} type={"text"} label={"description"}/>
             <Select
                 label="Select an Category"
                 className={"mt-2"}
