@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import {ZonedDateTime} from "@internationalized/date";
 
 /**
  * Returns a Response object with a JSON body
