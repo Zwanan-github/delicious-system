@@ -1,5 +1,4 @@
 import {NextRequest} from "next/server";
-import {Food} from "@prisma/client";
 import {prisma} from "../../../../../lib/prisma";
 import {jsonResponse} from "../../../../../lib/utils";
 import {writeFile} from "node:fs";
