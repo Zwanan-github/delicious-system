@@ -16,6 +16,7 @@ npm i
     ```
     DATABASE_URL="mysql://root:hh031010@123.60.107.63:10086/delicious_system"
     JWT_SECRET_KEY="delicious_system"
+    NEXT_PUBLIC_API_URL="http://localhost:3000"
     ```
 * run
   * prisma
